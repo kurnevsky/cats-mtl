@@ -10,13 +10,13 @@ position: 5
 Here's a map from pre-1.x cats typeclasses to cats-mtl typeclasses:
  - `MonadReader --> Local`
  - `MonadWriter --> Listen`
- - `Stateful --> Stateful`
+ - `MonadState --> Stateful`
 
 cats typeclass parameters and context bounds have to be rewritten, to include base classes.
 For example:
  - `[F[_]: MonadReader[?[_], E]]` will have to be adjusted to `[F[_]: Monad: Local[?[_], E]]`,
  - `[F[_]: MonadWriter[?[_], L]]` will have to be adjusted to `[F[_]: Monad: Listen[?[_], L]]`,
- - `[F[_]: Stateful[?[_], S]]` will have to be adjusted to `[F[_]: Monad: Stateful[?[_], S]]`
+ - `[F[_]: MonadState[?[_], S]]` will have to be adjusted to `[F[_]: Monad: Stateful[?[_], S]]`
 
 The root cause for this is addressed in the motivation section.
 
